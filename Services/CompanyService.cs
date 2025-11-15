@@ -4,7 +4,9 @@ namespace SistemaGestionEmpleados.Services;
 public class CompanyService
 {
     private readonly EmployeeService _employeeService = new EmployeeService();
+    private readonly ClientService _clientService = new ClientService();
 
+    //EMPLOYEES
     public void AddEmployee(Company company, Employee employee)
     {
         company.EmployeesList.Add(employee);
@@ -66,4 +68,44 @@ public class CompanyService
         
         foreach (var employee in employesRole)_employeeService.ShowInfo(employee);
     }
+    
+    
+    
+    
+    //CLIENTS
+
+    public void AddClient(Company company, Client client)
+    {
+        company.ClientsList.Add(client);
+        Console.WriteLine("Client successfully added.");
+    }
+
+    public void DeleteClient(Company company, string name, string lastName)
+    {
+        var client = company.ClientsList
+            .FirstOrDefault(c => c.FirstName == name && c.LastName == lastName);
+
+        if (client != null)
+        {
+            company.ClientsList.Remove(client);
+            Console.WriteLine("Client successfully removed.");
+        }
+        else
+        {
+            Console.WriteLine("Client not found.");
+        }
+    }
+
+    public void ShowAllClients(Company company)
+    {
+        if (!company.ClientsList.Any())
+        {
+            Console.WriteLine("No clients registered.");
+            return;
+        }
+
+        foreach (var client in company.ClientsList)
+            _clientService.ShowInfo(client);
+    }
+}
 }
