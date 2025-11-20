@@ -5,7 +5,7 @@ namespace SistemaGestionEmpleados.Models
         public string Name { get; set; }
         public string Address { get; set; }
 
-        public List<Employee> EmployeesList { get; set; } = new List<Employee>();
-        public List<Client> ClientsList { get; set; } = new List<Client>();
+        public List<Employee> EmployeesList { get; set; } = new();
+        public List<Client> ClientsList { get; set; } = new();
     }
 }
